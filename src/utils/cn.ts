@@ -4,11 +4,10 @@ import { extendTailwindMerge } from 'tailwind-merge';
 const twMerge = extendTailwindMerge({
   extend: {
     classGroups: {
-      'border-color': [{ border: ['default', 'emphasis', 'subtle', 'outline'] }],
+      'border-color': [{ border: ['emphasis', 'subtle', 'outline'] }],
       'text-color': [
         {
           text: [
-            'default',
             'emphasis',
             'muted',
             'subtle',
@@ -20,8 +19,9 @@ const twMerge = extendTailwindMerge({
           ],
         },
       ],
-      'bg-color': [{ bg: ['canvas', 'surface', 'elevated', 'muted', 'subtle', 'soft', 'gentle', 'inverse'] }],
-      'ring-color': [{ ring: ['default'] }],
+      'bg-color': [
+        { bg: ['canvas', 'surface', 'elevated', 'muted', 'subtle', 'soft', 'gentle', 'inverse'] },
+      ],
     },
   },
 });
