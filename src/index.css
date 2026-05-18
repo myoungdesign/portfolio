@@ -1,6 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Nata+Sans:wght@100..900&display=swap');
-
 @import './styles/fonts.css';
+@import './styles/animate.css';
+
+@import 'tailwindcss';
+
+@source '../app/**/*.{ts,tsx}';
+@source './**/*.{ts,tsx}';
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
@@ -266,6 +270,14 @@
 
   --spacing: 0.25rem;
 
+  --spacing-2xs: calc(var(--spacing) * 2);
+  --spacing-xs: calc(var(--spacing) * 4);
+  --spacing-sm: calc(var(--spacing) * 6);
+  --spacing-md: calc(var(--spacing) * 10);
+  --spacing-lg: calc(var(--spacing) * 12);
+  --spacing-xl: calc(var(--spacing) * 16);
+  --spacing-2xl: calc(var(--spacing) * 20);
+
   --breakpoint-sm: 40rem;
   --breakpoint-md: 48rem;
   --breakpoint-lg: 64rem;
@@ -285,6 +297,7 @@
   --container-5xl: 64rem;
   --container-6xl: 72rem;
   --container-7xl: 80rem;
+  --container-8xl: 90rem;
 }
 
 @layer theme {
@@ -426,44 +439,6 @@
   }
 }
 
-@theme inline {
-  --spacing-2xs: --spacing(2);
-  --spacing-xs: --spacing(4);
-  --spacing-sm: --spacing(6);
-  --spacing-md: --spacing(10);
-  --spacing-lg: --spacing(12);
-  --spacing-xl: --spacing(16);
-  --spacing-2xl: --spacing(20);
-}
-
-@layer base {
-  @media (max-width: 47.9375rem) {
-    /* < 768px → sm */
-    :root {
-      --spacing-2xs: --spacing(1);
-      --spacing-xs: --spacing(2);
-      --spacing-sm: --spacing(3);
-      --spacing-md: --spacing(4);
-      --spacing-lg: --spacing(5);
-      --spacing-xl: --spacing(6);
-      --spacing-2xl: --spacing(7);
-    }
-  }
-
-  @media (min-width: 48rem) and (max-width: 63.9375rem) {
-    /* 768–1023px → md */
-    :root {
-      --spacing-2xs: --spacing(1.5);
-      --spacing-xs: --spacing(3);
-      --spacing-sm: --spacing(5);
-      --spacing-md: --spacing(6);
-      --spacing-lg: --spacing(8);
-      --spacing-xl: --spacing(10);
-      --spacing-2xl: --spacing(12);
-    }
-  }
-}
-
 @layer base {
   :root {
     color-scheme: light;
@@ -478,12 +453,12 @@
   }
 
   * {
-    @apply border-subtle text-fg bg-canvas ring-brand;
+    @apply border-subtle ring-brand;
   }
 
   html,
   body {
-    background-color: var(--color-bg-canvas);
+    background-color: var(--color-gray-10);
     font-family: var(--font-sans);
     font-size: 100%;
     line-height: var(--leading-normal);
@@ -511,44 +486,44 @@
   }
 
   h1 {
-    font-size: var(--text-6xl);
+    font-size: var(--text-5xl);
     font-weight: var(--font-weight-medium);
     line-height: 1.5;
     letter-spacing: var(--tracking-tighter);
   }
 
   h2 {
-    font-size: var(--text-5xl);
+    font-size: var(--text-4xl);
     font-weight: var(--font-weight-medium);
-    line-height: 1.5;
+    line-height: calc(3.5 / 2.25);
     letter-spacing: var(--tracking-tight);
   }
 
   h3 {
-    font-size: var(--text-4xl);
+    font-size: var(--text-3xl);
     font-weight: var(--font-weight-medium);
-    line-height: calc(3.5 / 2.25);
+    line-height: calc(3 / 1.875);
     letter-spacing: var(--tracking-tighter);
   }
 
   h4 {
     font-size: var(--text-2xl);
     font-weight: var(--font-weight-medium);
-    line-height: calc(2.5 / 1.5);
+    line-height: 1.5;
     letter-spacing: var(--tracking-tight);
   }
 
   h5 {
-    font-size: var(--text-lg);
+    font-size: var(--text-xl);
     font-weight: var(--font-weight-medium);
-    line-height: calc(1.875 / 1.125);
+    line-height: 1.5;
     letter-spacing: var(--tracking-normal);
   }
 
   h6 {
-    font-size: var(--text-md);
+    font-size: var(--text-lg);
     font-weight: var(--font-weight-medium);
-    line-height: 1.75;
+    line-height: calc(1.875 / 1.125);
     letter-spacing: var(--tracking-normal);
   }
 
@@ -558,5 +533,31 @@
 
   :focus:not(:focus-visible) {
     outline: none;
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  /* < 768px → sm */
+  :root {
+    --spacing-2xs: calc(var(--spacing) * 1);
+    --spacing-xs: calc(var(--spacing) * 2);
+    --spacing-sm: calc(var(--spacing) * 3);
+    --spacing-md: calc(var(--spacing) * 4);
+    --spacing-lg: calc(var(--spacing) * 5);
+    --spacing-xl: calc(var(--spacing) * 6);
+    --spacing-2xl: calc(var(--spacing) * 7);
+  }
+}
+
+@media (min-width: 48rem) and (max-width: 63.9375rem) {
+  /* 768–1023px → md */
+  :root {
+    --spacing-2xs: calc(var(--spacing) * 2);
+    --spacing-xs: calc(var(--spacing) * 4);
+    --spacing-sm: calc(var(--spacing) * 6);
+    --spacing-md: calc(var(--spacing) * 9);
+    --spacing-lg: calc(var(--spacing) * 10);
+    --spacing-xl: calc(var(--spacing) * 12);
+    --spacing-2xl: calc(var(--spacing) * 15);
   }
 }

@@ -1,0 +1,90 @@
+/* Meteor animations */
+
+@utility meteor-in {
+  animation-timing-function: cubic-bezier(0.3, 1.2, 0.7, 1);
+}
+
+@utility meteor-out {
+  animation-timing-function: cubic-bezier(0.7, 0, 1, 0.5);
+}
+
+/* Marquee text */
+
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee-left 15s linear infinite;
+}
+
+/* Thinking text */
+
+@keyframes shimmer-right {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@utility animate-thinking {
+  background: linear-gradient(
+    105deg,
+    currentColor 30%,
+    color-mix(in srgb, currentColor 50%, white) 50%,
+    currentColor 70%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-right 1.3s linear infinite;
+}
+
+/* Button bloom */
+
+@utility animate-bloom {
+  --btn-bloom-fill: white;
+  --btn-bloom-text: var(--color-gray-10);
+
+  position: relative;
+  isolation: isolate;
+  transition:
+    color 400ms ease-in-out,
+    border-color 400ms ease-in-out;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    left: 50%;
+    right: 50%;
+    border-radius: 9999px;
+    background-color: var(--btn-bloom-fill);
+    opacity: 0;
+    transition:
+      left 400ms ease-in-out,
+      right 400ms ease-in-out,
+      opacity 400ms ease-in-out;
+    z-index: -1;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: var(--btn-bloom-text);
+    border-color: var(--btn-bloom-fill);
+
+    &::before {
+      left: 0;
+      right: 0;
+      opacity: 1;
+    }
+  }
+}
